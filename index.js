@@ -73,32 +73,32 @@
 
 //IT WORKS
 
-var App = App || {};
+// var App = App || {};
 
-App.define = function (namespace) {
-    var parts = namespace.split("."),
-        parent = App,
-        i;
+// App.define = function (namespace) {
+//     var parts = namespace.split("."),
+//         parent = App,
+//         i;
 
-    if (parts[0] == "App") {
-        parts = parts.slice(1);
-        console.log(parts);
-    }
+//     if (parts[0] == "App") {
+//         parts = parts.slice(1);
+//         console.log(parts);
+//     }
 
-    for (i = 0; i < parts.length; i++) {
+//     for (i = 0; i < parts.length; i++) {
 
-        if (typeof parent[parts[i]] == "undefined") {
-            parent[parts[i]] = {};
-        }
+//         if (typeof parent[parts[i]] == "undefined") {
+//             parent[parts[i]] = {};
+//         }
 
-        parent = parent[parts[i]];
-    }
-    return parent;
-}
+//         parent = parent[parts[i]];
+//     }
+//     return parent;
+// }
 
 
-// App.define('utils.calc');
-App.define('utils.show');
+// // App.define('utils.calc');
+// App.define('utils.show');
 
 
 
@@ -141,26 +141,59 @@ App.define('utils.show');
 
 
 
-App.utils.show = (function () {
-    // console.log("utils.Show");
+// App.utils.show = (function () {
+//     // console.log("utils.Show");
 
-    var screenX, screenY;
-    screenX = screen.width;
-    screenY = screen.height;
+//     var screenX, screenY;
+//     screenX = screen.width;
+//     screenY = screen.height;
 
-    return {
-        getWidth: function(){
-        console.error("Width :"+ screenX);
-    },
-    getHeight: function() {
-        console.error("Height :"+screenY);
+//     return {
+//         getWidth: function(){
+//         console.error("Width :"+ screenX);
+//     },
+//     getHeight: function() {
+//         console.error("Height :"+screenY);
 
+//     }
+// }
+// }());
+
+// var Show = App.utils.show;
+// Show.getWidth();
+// Show.getHeight();
+
+
+// MY OWN MODULE WITH UNIQ NAME SPACES
+
+
+var JJ = JJ || {};
+
+JJ.define = function (namespace) {
+    var parts = namespace.split("."),
+        parent = JJ,
+        i;
+
+    if (parts[0] == "JJ") {
+        parts = parts.slice(1);
+        console.log(parts);
     }
+
+    for (i = 0; i < parts.length; i++) {
+
+        if (typeof parent[parts[i]] == "undefined") {
+            parent[parts[i]] = {};
+        }
+
+        parent = parent[parts[i]];
+    }
+    return parent;
 }
+
+
+// JJ.define('tools.calc');
+JJ.define('tools.show');
+
+JJ.tools.show =(function(){
+console.log("SHOWWWWWWWWWWWWWWWW");
 }());
-
-var Show = App.utils.show;
-Show.getWidth();
-Show.getHeight();
-
-

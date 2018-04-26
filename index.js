@@ -167,14 +167,45 @@
 // MY OWN MODULE WITH UNIQ NAME SPACES
 
 
-var JJ = JJ || {};
+// var JJ = JJ || {};
 
-JJ.define = function (namespace) {
+// JJ.define = function (namespace) {
+//     var parts = namespace.split("."),
+//         parent = JJ,
+//         i;
+
+//     if (parts[0] == "JJ") {
+//         parts = parts.slice(1);
+//         console.log(parts);
+//     }
+
+//     for (i = 0; i < parts.length; i++) {
+
+//         if (typeof parent[parts[i]] == "undefined") {
+//             parent[parts[i]] = {};
+//         }
+
+//         parent = parent[parts[i]];
+//     }
+//     return parent;
+// }
+
+// JJ.define('tools.show');
+
+// JJ.tools.show = (function () {
+//     console.log("SHOWWWWWWWWWWWWWWWW");
+// }());
+
+
+
+var ANIMAL = ANIMAL || {};
+
+ANIMAL.define = function (namespace) {
     var parts = namespace.split("."),
-        parent = JJ,
+        parent = ANIMAL,
         i;
 
-    if (parts[0] == "JJ") {
+    if (parts[0] == "ANIMAL") {
         parts = parts.slice(1);
         console.log(parts);
     }
@@ -190,10 +221,106 @@ JJ.define = function (namespace) {
     return parent;
 }
 
+//==========================================
 
-// JJ.define('tools.calc');
-JJ.define('tools.show');
+ANIMAL.define('create.cat');
+ANIMAL.define('create.dog');
 
-JJ.tools.show =(function(){
-console.log("SHOWWWWWWWWWWWWWWWW");
+ANIMAL.create.cat = (function () {
+
+    var name, age, beed;
+
+    return {
+        setName: function (val) {
+            name = val;
+        },
+        setAge: function (val) {
+            age = val;
+        },
+
+        setBreed: function (val) {
+            breed = val;
+        },
+        show: function(){
+            console.log(name,age,breed);
+        }
+    }
+    //  console.log(name,age,breed);
+})();
+
+// ANIMAL.create.dog = (function () {
+//     var name, age, beed,barking;
+
+
+//     return {
+//         setName: function (val) {
+//             name = val;
+//         },
+//         setAge: function (val) {
+//             age = val;
+//         },
+
+//         setBreed: function (val) {
+//             breed = val;
+//         },
+//         setBark: function (val) {
+//             barking = val;
+//         },
+//         show: function(){
+//             console.log(name,age,breed,barking);
+//         }
+//     }
+  
+// })();
+
+//NEW DOG
+
+ANIMAL.create.dog = (function () {
+    var name, age, beed,barking;
+
+
+         function setName (val) {
+            name = val;
+        }
+        function  setAge(val) {
+            age = val;
+        }
+
+         function setBreed(val) {
+            breed = val;
+        }
+        function setBark(val) {
+            barking = val;
+        }
+        function  show(){
+            console.log(name,age,breed,barking);
+        }
+        return{
+
+            setName:setName,
+            setAge:setAge,
+            setBreed:setBreed,
+            setBark:setBark,
+            show:show
+        };
+  
+})();
+
+
+// (function () {
+//     var cat = ANIMAL.create.cat;
+//     cat.setName('Murzik');
+//     cat.setAge(2);
+//     cat.setBreed('CATYAO');
+//     cat.show();
+// }());
+
+(function () {
+    var dog = ANIMAL.create.dog;
+    dog.setName('Bobik');
+    dog.setAge(4);
+    dog.setBreed('Dvorterjer');
+    dog.setBark('Loud');
+    dog.show();
 }());
+

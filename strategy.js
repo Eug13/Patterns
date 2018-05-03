@@ -51,12 +51,12 @@ validator.types.required = {
     message: "Required"
 };
 
-validator.types.isAlphaNum = {
-    validate: function (value) {
-        return !!/[^a­z09]­/i.test(value);
-    },
-    message: "the value can only contain characters and numbers, and special symbols "
-};
+// validator.types.isAlphaNum = {
+//     validate: function (value) {
+//         return !!/[^a­z09]­/i.test(value);
+//     },
+//     message: "the value can only contain characters and numbers, and special symbols "
+// };
 
 validator.types.number = {
     validate: function (value) {
@@ -77,7 +77,7 @@ validator.types.email = {
 validator.config = {
     firstName: "required",
     lastName: "required",
-    username:'isAlphaNum',
+    // username:'isAlphaNum',
     age: 'number',
     email: 'email'
 
@@ -90,8 +90,8 @@ validator.config = {
 var obj1 = {
     firstName: "tom",
     lastName: "tompson",
-    username:"Eug$$@#sdjmkvl=\=-13",
-    age: 43,
+    // username:"Eugisdfjsdjljfwu7342347237",
+    age: 42,
     email: 'mail@mail.com'
 };
 

@@ -1,110 +1,112 @@
-// var publisher = {
-//     subscribers: {
-//         any: []                // тип события: подписчик 
-//     },
-
-//     subscribe: function (fn, type) {
-
-//         type = type || 'any';
-
-//         if (typeof this.subscribers[type] === 'undefined') {
-
-//             this.subscribers[type] = [];
-//         }
-
-//         this.subscribers[type].push(fn);
-//     },
-
-//     unsubscribe: function (fn, type) {
-
-//         this.visitSubscribers('unsubscribe', fn, type);
-//     },
-
-//     publish: function (publication, type) {
-
-//         this.visitSubscribers('publish', publication, type);
-//     },
-
-//     visitSubscribers: function (action, arg, type) {
-//         var pubtype = type || 'any',
-//             subscribers = this.subscribers[pubtype],
-//             i,
-//             max = subscribers.length;
-
-//         for (i = 0; i < max; i += 1) {
-//             if (action === 'publish') {
-//                 subscribers[i](arg);
-//             } else {
-//                 if (subscribers[i] === arg) {
-//                     subscribers.splice(i, 1);
-//                 }
-//             }
-//         }
-//     }
-// };
-
-// //makes publisher or new magazine
-// function makePublisher(o) {
-//     var i;
-//     for (i in publisher) {
-//         if (publisher.hasOwnProperty(i) && typeof publisher[i] === 'function') {
-//             o[i] = publisher[i];
-//         }
-//     }
-//     o.subscribers = { any: [] };
-// }
-
-// //Magazine
-
-// var paper = {
-//     daily: function () {
-//         this.publish('big news today');
-//     },
-//     monthly: function () {
-//         this.publish('interesting analysis', 'monthly');
-//     }
-// };
-
-// makePublisher(paper);
-
-
 //FIRST VERSION
 
-// var joe = {
-//     drinkCoffee: function (paper) {
-//         console.log('Just read ' + paper);
-//     },
-//     sundayPreNap: function (monthly) {
-//         console.log('About to fall asleep reading this ' + monthly);
-//     }
-// };
+var publisher = {
+    subscribers: {
+        any: []                // тип события: подписчик 
+    },
 
-// //joe as subscriber
-// paper.subscribe(joe.drinkCoffee);
-// paper.subscribe(joe.sundayPreNap, 'monthly');
+    subscribe: function (fn, type) {
 
-// //joe got his news
-// paper.daily();
-// paper.daily();
-// paper.daily();
-// paper.monthly();
+        type = type || 'any';
+
+        if (typeof this.subscribers[type] === 'undefined') {
+
+            this.subscribers[type] = [];
+        }
+
+        this.subscribers[type].push(fn);
+    },
+
+    unsubscribe: function (fn, type) {
+
+        this.visitSubscribers('unsubscribe', fn, type);
+    },
+
+    publish: function (publication, type) {
+
+        this.visitSubscribers('publish', publication, type);
+    },
+
+    visitSubscribers: function (action, arg, type) {
+        var pubtype = type || 'any',
+            subscribers = this.subscribers[pubtype],
+            i,
+            max = subscribers.length;
+
+        for (i = 0; i < max; i += 1) {
+            if (action === 'publish') {
+                subscribers[i](arg);
+            } else {
+                if (subscribers[i] === arg) {
+                    subscribers.splice(i, 1);
+                }
+            }
+        }
+    }
+};
+
+//makes publisher or new magazine
+function makePublisher(o) {
+    var i;
+    for (i in publisher) {
+        if (publisher.hasOwnProperty(i) && typeof publisher[i] === 'function') {
+            o[i] = publisher[i];
+        }
+    }
+    o.subscribers = { any: [] };
+}
+
+//Magazine
+
+var paper = {
+    daily: function () {
+        this.publish('big news today');
+    },
+    monthly: function () {
+        this.publish('interesting analysis', 'monthly');
+    }
+};
+
+makePublisher(paper);
 
 
-// // we make joe as publisher in his micro blog
-// makePublisher(joe);
-// joe.tweet = function (msg) {
-//     this.publish(msg);
-// };
 
-// //paper publisher read joe's tweets
 
-// paper.readTweets = function (tweet) {
-//     alert('Call big meeting! Someone ' + tweet);
-// };
-// joe.subscribe(paper.readTweets);
+var joe = {
+    drinkCoffee: function (paper) {
+        console.log('Just read ' + paper);
+    },
+    sundayPreNap: function (monthly) {
+        console.log('About to fall asleep reading this ' + monthly);
+    }
+};
 
-// //joe's post today
-// joe.tweet("hated the paper today");
+//joe as subscriber
+paper.subscribe(joe.drinkCoffee);
+paper.subscribe(joe.sundayPreNap, 'monthly');
+
+//joe got his news
+paper.daily();
+paper.daily();
+paper.daily();
+paper.monthly();
+
+
+// we make joe as publisher in his micro blog
+makePublisher(joe);
+joe.tweet = function (msg) {
+    this.publish(msg);
+};
+
+//paper publisher read joe's tweets
+
+paper.readTweets = function (tweet) {
+    alert('Call big meeting! Someone ' + tweet);
+};
+joe.subscribe(paper.readTweets);
+
+//joe's post today
+joe.tweet("hated the paper today");
 
 
 //SECOND VERSION AS GAME
